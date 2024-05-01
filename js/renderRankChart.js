@@ -8,7 +8,14 @@ const icons = {
 
 function recreateRankChart(womenPositions, menPositions, unknownPositions) {
     let titleSet = new Set();
-    womenPositions.forEach((r) => {
+    chartForGender(womenPositions, titleSet);
+    chartForGender(menPositions, titleSet);
+    chartForGender(unknownPositions, titleSet);
+   
+}
+
+function chartForGender(genderPositions, titleSet) {
+    genderPositions.forEach((r) => {
         const title = r["primary_working_title"];
         if (!titleSet.has(title)) {
             titleSet.add(title);
