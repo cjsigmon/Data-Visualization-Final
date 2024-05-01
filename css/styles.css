@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 0;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    padding-left: 55px;
+    font-family: sans-serif;
+}
+
+#main {
+    height: 100vh;
+    width: 100vw;
+    background-color: #D9D9D9;
+}
+
+#dataContent {
+    height: 75%;
+    width: 85%;
+    margin-left: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0px 0px 55px 55px;
+}
+
+#topRow {
+    height: 55%;
+}
+
+#tableContainer {
+    position: relative;
+    width: 35%;
+    height: 100%;
+}
+
+.tab {
+    height: 8%;
+    width: 8%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 0.5em;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 6px;
+    text-decoration: underline;
+}
+
+.selected {
+    background-color: white;
+    border: none;
+}
+
+.unselected {
+    border-top: 1px dashed gray;
+    border-left: 1px dashed gray;
+    border-right: 1px dashed gray;
+    background-color: #D9D9D9;
+
+}
+
+.tab:hover {
+    cursor: pointer;
+}
+
+#tableTab {
+    right: 0;
+}
+
+#bubbleTab {
+    right: 8%;
+}
+
+#table, #bubbleChart {
+    height: 92%;
+    width: 100%;
+    position: absolute;
+    top: 8%;
+    background-color: white;
+    border-radius: 55px 0px 5px 5px;
+}
+
+.d-table {
+    display: table;
+}
+button {
+    border: none;
+}
+button:hover {
+    cursor: pointer;
+}
+
+
+#activeBtn {
+    background-color: white;
+    border: 2px solid gray;
+    border-top: none;
+    border-bottom: none;
+
+}
+
+#tablePageBtns {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin-bottom: 13px;
+}
+
+table {
+    display: none;
+}
+
+.helper {
+    margin: 16px;
+    margin-bottom: 13px;
+    font-family: sans-serif;
+}
+
+
+
+#bubbleChart {
+    display: none;
+}
+
+
+
+
+#barChartContainer {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+#barChart {
+    background-color: #F4F4F4;
+    margin-top: 4%;
+    margin-bottom: 1%;
+    height: 80%;
+    width: 100%;
+    border-radius: 8px 30px 0px 30px;
+}
+
+#headers {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#headers > p {
+    margin: 10px;
+    margin-left: 32px;
+    margin-right: 54px;
+    font-family: sans-serif;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
+}
+
+td {
+    margin: 32px;
+    padding-left: 32px;
+
+}
+
+#barChartCheckboxContainer {
+    background: linear-gradient(to right, #D9D9D9, #737373);
+    height: 15%;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+#bottomRow {
+    height: 40%;
+    background-color: #FDFDFD;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#circleChart {
+    height: 100%;
+    width: 22%;
+}
+
+#divider {
+
+    height: 90%;
+    width: 1px;
+    background-color: #737373;
+}
+
+#genderBreakdown {
+    height: 100%;
+    width: 78%;
+}
+

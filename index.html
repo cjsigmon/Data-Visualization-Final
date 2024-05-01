@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNC Salaries Dashboard</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div id="main">
+        <h1>UNC Salaries Dashboard</h1>
+        <div id="dataContent">
+            <div class="row" id="topRow">
+                <div id="tableContainer">
+                    <div class="tab selected" id="tableTab">table</div>
+                    <div class="tab unselected" id="bubbleTab">graph</div>
+
+                    <div id="table">
+                        <div id="headers">
+                            <p>Department</p>
+                            <p>Number of Profs</p>
+                        </div>
+                        <div id="tableCollection"></div>
+                        <div id="tablePageBtns">
+                            
+                        </div>
+                    </div>
+                    <div id="bubbleChart"><p class="helper">bubbles</p></div>
+                </div>
+
+                <div id="barChartContainer">
+                    <div id="barChart">
+                      
+                            <canvas id="chartGraph"></canvas>
+                        
+                    </div>
+                    <div id="barChartCheckboxContainer"></div>
+                </div>
+
+            </div>
+
+            <div class="row" id="bottomRow">
+                <div id="circleChart">
+                    <canvas id="circleGraph"></canvas>
+
+                </div>
+
+                <div id="divider"></div>
+
+                <div id="genderBreakdown">
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/renderChart.js"></script>
+    <script src="./js/renderCircleChart.js"></script>
+    <script src="./js/handleTable.js"></script>
+    <script src="./js/renderTable.js"></script>
+
+</body>
+</html>
