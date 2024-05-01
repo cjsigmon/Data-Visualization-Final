@@ -217,6 +217,19 @@ td {
     height: 100%;
     width: 78%;
     display: flex;
-    font-size: 5pt;
+    font-size: 7pt;
+    justify-content: space-evenly;
+}
+
+.woman-prof {
+    color: blue;
+}
+
+.man-prof {
+    color: red;
+}
+
+.unknown-prof {
+    color: gray;
 }
 

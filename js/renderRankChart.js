@@ -1,4 +1,10 @@
 const genderBreakdown = document.getElementById("genderBreakdown");
+const iconHtml = `<i class="fa-solid fa-person"></i>`;
+const icons = {
+    "female": `<i class="fa-solid fa-person woman-prof"></i>`,
+    "male": `<i class="fa-solid fa-person man-prof"></i>`,
+    "unknown": `<i class="fa-solid fa-person unknown-prof"></i>`
+};
 
 function recreateRankChart(womenPositions, menPositions, unknownPositions) {
     let titleSet = new Set();
@@ -14,7 +20,8 @@ function recreateRankChart(womenPositions, menPositions, unknownPositions) {
             const genderSection = document.createElement("div");
             genderSection.classList.add(r["likely_gender"]);
             let underscoresTitle = title.split(' ').join('_');
-            genderSection.innerText = `${underscoresTitle}-${r['likely_gender']}`;
+            genderSection.innerHTML+= icons[r["likely_gender"]];
+            
             genderSection.id = `${underscoresTitle}-${r['likely_gender']}`;
             
             newTitleDiv.append(genderSection);
