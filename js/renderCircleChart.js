@@ -12,7 +12,7 @@ async function init() {
     }
 
 
-    recreateCircleChart("Medicine");
+    recreateCircleChart("ASOD");
 }
 
 init();

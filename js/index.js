@@ -20,4 +20,4 @@ const nonTenureModifiers = [
 let filterRanks = false;
 let tenureTrack = false;
 
-let selectedDept = "Medicine";
+let selectedDept = "ASOD";

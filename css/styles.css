@@ -89,10 +89,16 @@ h1 {
 #allDeptsChart {
     height: 80%;
     width: 100%;
+    overflow-x: scroll;
     position: absolute;
     top: 8%;
     background-color: #F4F4F4;
     border-radius: 8px 30px 0px 30px;
+}
+
+#allDeptsGraphContainer {
+    width: 1500px;
+    height: 100%;
 }
 
 

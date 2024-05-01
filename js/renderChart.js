@@ -13,7 +13,7 @@ async function init() {
         return response.json();
     });
 
-    recreateChart("Medicine");
+    recreateChart("ASOD");
 
 }
 
@@ -130,7 +130,7 @@ function makeGraph(data, filterDept) {
           },
           title: {
             display: true,
-            text: `Annual Base Salary - ${filterDept} Department`
+            text: `Annual Base Salary, Department: ${filterDept}`
           }
         }
       }
