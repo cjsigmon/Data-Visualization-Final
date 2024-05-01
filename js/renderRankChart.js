@@ -6,14 +6,23 @@ const titleRow = document.getElementById("titleRow");
 
 
 const iconHtml = `<i class="fa-solid fa-person"></i>`;
-const icons = {
-    "female": `<i class="fa-solid fa-person woman-prof"></i>`,
-    "male": `<i class="fa-solid fa-person man-prof"></i>`,
-    "unknown": `<i class="fa-solid fa-person unknown-prof"></i>`
-};
+
+
+function createIcon(gender, iconSize) {
+    return () => {
+        let i = document.createElement("i");
+        i.className = `fa-solid fa-person ${gender}-prof`;
+        i.style.fontSize = `${iconSize}pt`;
+        return i;
+    }
+}
 
 function recreateRankChart(womenPositions, menPositions, unknownPositions, overallPositions) {
     let titleSet = new Set();
+    femaleRow.innerHTML = '';
+    maleRow.innerHTML = '';
+    unknownRow.innerHTML = '';
+    titleRow.innerHTML = '';
     cutSectionsForTitles(overallPositions, titleSet)
     
     // chartForGender(womenPositions, titleSet);
@@ -24,6 +33,8 @@ function recreateRankChart(womenPositions, menPositions, unknownPositions, overa
 
 
 function cutSectionsForTitles(overallPositions, titleSet) {
+    let iconSize = 11;
+
     overallPositions.forEach((r) => {
         const title = r["primary_working_title"];
         const underscoresTitle = title.split(' ').join('_');
@@ -47,50 +58,7 @@ function cutSectionsForTitles(overallPositions, titleSet) {
             unknownSection.id = `${underscoresTitle}-unknown`;
             unknownRow.append(unknownSection);
         }
-        const cellToUpdate = document.getElementById(`${underscoresTitle}-${r['likely_gender']}`);
-        cellToUpdate.innerHTML+= icons[r["likely_gender"]];
-
+        let cellToUpdate = document.getElementById(`${underscoresTitle}-${r['likely_gender']}`);
+        cellToUpdate.append(createIcon(r["likely_gender"], iconSize)())
     });
 }
-
-// function chartForGender(genderPositions, titleSet) {
-//     genderPositions.forEach((r) => {
-//         const title = r["primary_working_title"];
-//         let underscoresTitle = title.split(' ').join('_');
-
-//         if (!titleSet.has(title)) {
-//             titleSet.add(title);
-//             const newTitleDiv = document.createElement("div");
-//             newTitleDiv.innerText = title;
-//             newTitleDiv.id = underscoresTitle;
-//             newTitleDiv.style.maxWidth = '140px';
-
-//             const genderSection = document.createElement("div");
-//             genderSection.classList.add(r["likely_gender"]);
-//             genderSection.innerHTML+= icons[r["likely_gender"]];
-            
-//             genderSection.id = `${underscoresTitle}-${r['likely_gender']}`;
-            
-//             newTitleDiv.append(genderSection);
-//             genderBreakdown.append(newTitleDiv);
-
-//         } else {
-//             const oldTitleDiv = document.getElementById(underscoresTitle);
-//             let tryGetGenderSection = document.getElementById(`${underscoresTitle}-${r['likely_gender']}`)
-//             if (!tryGetGenderSection) {
-//                 const genderSection = document.createElement("div");
-//                 genderSection.classList.add(r["likely_gender"]);
-//                 genderSection.innerHTML+= icons[r["likely_gender"]];
-                
-//                 genderSection.id = `${underscoresTitle}-${r['likely_gender']}`;
-                
-//                 oldTitleDiv.append(genderSection);
-//                 genderBreakdown.append(oldTitleDiv);
-//             } else {
-//                 const genderSection = tryGetGenderSection;
-//                 genderSection.innerHTML+= icons[r["likely_gender"]];
-//             }
-            
-//         }
-//     })
-// }
