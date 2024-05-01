@@ -20,7 +20,7 @@ async function init() {
 init();
 
 
-function recreateChart(filterDept, filterRanks, tenureTrack) {
+function recreateChart(filterDept) {
     menSals = [];
     womenSals = [];
     unknownSals = [];
@@ -34,17 +34,26 @@ function recreateChart(filterDept, filterRanks, tenureTrack) {
     if (filterRanks) {
       if (tenureTrack) {
         data = data.filter((r) => {
-          let title = r["primary_working_title"];
           let positionShouldBeFiltered = false;
+          let title = r["primary_working_title"];
           nonTenureModifiers.forEach((modifier) => {
             if (title.includes(modifier)) {
               positionShouldBeFiltered = true;
             }
           })
           return positionShouldBeFiltered;
-        })
+        });
       } else {
-
+        data = data.filter((r) => {
+          let positionShouldBeFiltered = true;
+          let title = r["primary_working_title"];
+          nonTenureModifiers.forEach((modifier) => {
+            if (title.includes(modifier)) {
+              positionShouldBeFiltered = false;
+            }
+          })
+          return positionShouldBeFiltered;
+        });
       }
     }
 
@@ -90,12 +99,12 @@ function makeGraph(data, filterDept) {
         data: {
           labels: ['Overall', 'Women', 'Men', 'Unable to predict'],
           datasets: [{
-            label: 'Annual Base Salary',
+            label: 'Average Base Salary',
             data: data,
             backgroundColor: [
-                'rgba(255, 159, 64, 0.7)',
                 'rgba(54, 162, 235, 0.7)',
-                'rgba(255, 99, 132, 0.7)',
+                'rgba(255, 168, 0, 1.0)',
+                'rgba(20, 255, 0, 1.0)',
                 'rgba(201, 203, 207, 0.7)'
               ],
             borderWidth: 1

@@ -18,7 +18,7 @@ async function init() {
 init();
 
 
-function recreateCircleChart(filterDept, filterRanks, tenureTrack) {
+function recreateCircleChart(filterDept) {
     menPositions = [];
     womenPositions = [];
     unknownPositions = [];
@@ -29,25 +29,36 @@ function recreateCircleChart(filterDept, filterRanks, tenureTrack) {
     let data = allProfsData.filter((r) => {
        return r["Department"] == filterDept}
     );
+
     if (filterRanks) {
-      if (tenureTrack) {
+      if (!tenureTrack) {
         data = data.filter((r) => {
+          let positionShouldBeIncluded = false;
           let title = r["primary_working_title"];
-          let positionShouldBeFiltered = false;
           nonTenureModifiers.forEach((modifier) => {
             if (title.includes(modifier)) {
-              positionShouldBeFiltered = true;
+              positionShouldBeIncluded = true;
             }
           })
-          return positionShouldBeFiltered;
-        })
+          return positionShouldBeIncluded;
+        });
       } else {
-
+        data = data.filter((r) => {
+          let positionShouldBeIncluded = true;
+          let title = r["primary_working_title"];
+          nonTenureModifiers.forEach((modifier) => {
+            if (title.includes(modifier)) {
+              positionShouldBeIncluded = false;
+            }
+          })
+          return positionShouldBeIncluded;
+        });
       }
     }
 
 
     dividePositions(data);
+    console.log("current", data);
     makeCircle(postionsData);
 
     recreateRankChart(womenPositions, menPositions, unknownPositions, overallPositions)
@@ -83,8 +94,8 @@ function makeCircle(data) {
               {
                 data: data,
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(255, 168, 0, 1.0)',
+                    'rgba(20, 255, 0, 1.0)',
                     'rgba(201, 203, 207, 0.7)'
                   ],
               }

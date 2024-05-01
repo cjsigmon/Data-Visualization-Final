@@ -17,4 +17,7 @@ const nonTenureModifiers = [
     "Term", "Trm"
 ];
 
+let filterRanks = false;
+let tenureTrack = false;
+
 let selectedDept = "Medicine";

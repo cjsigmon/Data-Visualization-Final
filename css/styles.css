@@ -202,19 +202,18 @@ td {
 
 #circleChart {
     height: 100%;
-    width: 22%;
+    width: 18%;
 }
 
 #divider {
     height: 90%;
     width: 1px;
-    background-color: #737373;
 }
 
 #genderBreakdown {
     display: table;
     height: 100%;
-    width: 78%;
+    width: 82%;
 }
 
 .titles-row {
@@ -240,11 +239,11 @@ td {
                 'rgba(201, 203, 207, 0.7)' */
 
 .female-prof {
-    color: rgba(54, 162, 235, 0.9);
+    color: rgb(255, 168, 0);
 }
 
 .male-prof {
-    color: rgba(255, 99, 132, 0.9);
+    color: rgb(20, 255, 0);
 }
 
 .unknown-prof {

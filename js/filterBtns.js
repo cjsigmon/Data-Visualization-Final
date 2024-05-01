@@ -4,22 +4,22 @@ const nonTenureChoice = document.getElementById("nonTenureChoice");
 let barChartCheckboxContainer = document.getElementById("barChartCheckboxContainer");
 
 tenureChoice.addEventListener("click", () => {
-    console.log("clicky", overallPositions)
-    console.log(selectedDept)
-    recreateChart(selectedDept, true, true);
-    recreateCircleChart(selectedDept, true, true);
+    filterRanks = true;
+    tenureTrack = true;
+
+    recreateChart(selectedDept);
+    recreateCircleChart(selectedDept);
 });
 
 nonTenureChoice.addEventListener("click", () => {
-    console.log("clicky", overallPositions)
-    console.log(selectedDept)
-    recreateChart(selectedDept, true, false);
-    recreateCircleChart(selectedDept, true, true);
+    filterRanks = true;
+    tenureTrack = false;
+    recreateChart(selectedDept);
+    recreateCircleChart(selectedDept);
 });
-
-tenureChoice.addEventListener("click", () => {
-    console.log("clicky", overallPositions)
-    console.log(selectedDept)
-    recreateChart(selectedDept, false);
-    recreateCircleChart(selectedDept, false);
+allChoice.addEventListener("click", () => {
+    filterRanks = false;
+    tenureTrack = false;
+    recreateChart(selectedDept);
+    recreateCircleChart(selectedDept);
 });
