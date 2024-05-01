@@ -20,7 +20,6 @@ async function init() {
 
 
     recreateCircleChart("Medicine");
-
 }
 
 init();
@@ -41,6 +40,8 @@ function recreateCircleChart(filterDept) {
     );
     dividePositions(data);
     makeCircle(postionsData);
+
+    recreateRankChart(womenPositions, menPositions, unknownPositions)
 }
 
 
