@@ -1,7 +1,7 @@
-const tableTab = document.getElementById("tableTab");
-const bubbleTab = document.getElementById("bubbleTab");
-const table = document.getElementById("table");
-const bubbleChart = document.getElementById("bubbleChart");
+const tableTab = document.getElementById("deptTab");
+const bubbleTab = document.getElementById("allTab");
+const table = document.getElementById("barChart");
+const bubbleChart = document.getElementById("allDeptsChart");
 
 
 tableTab.onclick = function() {

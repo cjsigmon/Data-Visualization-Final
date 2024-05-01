@@ -74,21 +74,30 @@ h1 {
     cursor: pointer;
 }
 
-#tableTab {
-    right: 0;
+#deptTab {
+    top: 2%;
+    left: 0%;
+    z-index: 2;
 }
 
-#bubbleTab {
-    right: 8%;
+#allTab {
+    top: 2%;
+    left: 8%;
+    z-index: 2;
 }
 
-#table, #bubbleChart {
-    height: 92%;
+#allDeptsChart {
+    height: 80%;
     width: 100%;
     position: absolute;
     top: 8%;
-    background-color: white;
-    border-radius: 55px 0px 5px 5px;
+    background-color: #F4F4F4;
+    border-radius: 8px 30px 0px 30px;
+}
+
+
+#allDeptsChart {
+    display: none;
 }
 
 .d-table {
@@ -132,9 +141,6 @@ table {
 
 
 
-#bubbleChart {
-    display: none;
-}
 
 
 
@@ -144,6 +150,7 @@ table {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    position: relative;
 
 }
 

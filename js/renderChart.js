@@ -67,6 +67,7 @@ function recreateChart(filterDept) {
 function average(arr) {
     let sum = 0;
     let len = arr.length;
+    if (len==0) return len;
     arr.forEach((v) => {
         sum += v;
     });

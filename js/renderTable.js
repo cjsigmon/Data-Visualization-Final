@@ -12,7 +12,7 @@ function renderTable(data) {
 
     let currentHeight = 0;
     const rowHeight = 20;
-    const maxHeight = table.clientHeight - ((5*rowHeight) + 15);
+    const maxHeight = table.clientHeight - ((3*rowHeight));
 
     
     data.forEach((row) => {

@@ -13,8 +13,6 @@
         <div id="dataContent">
             <div class="row" id="topRow">
                 <div id="tableContainer">
-                    <div class="tab selected" id="tableTab">table</div>
-                    <div class="tab unselected" id="bubbleTab">graph</div>
 
                     <div id="table">
                         <div id="headers">
@@ -26,10 +24,12 @@
                             
                         </div>
                     </div>
-                    <div id="bubbleChart"><p class="helper">bubbles</p></div>
                 </div>
 
                 <div id="barChartContainer">
+                    <div class="tab selected" id="deptTab">dept</div>
+                    <div class="tab unselected" id="allTab">all depts</div>
+
                     <div id="barChart">
                       
                             <canvas id="chartGraph"></canvas>
@@ -46,6 +46,10 @@
                                 <label for="nonTenureChoice">Non Tenure Track</label>
                        
                         </div>
+                    </div>
+                    <div id="allDeptsChart">
+                        <canvas id="allDeptsGraph"></canvas>
+
                     </div>
                 </div>
 
@@ -79,6 +83,7 @@
     <script src="./js/renderCircleChart.js"></script>
     <script src="./js/handleTable.js"></script>
     <script src="./js/renderTable.js"></script>
+    <script src="./js/renderAllDeptsChart.js"></script>
     <script src="./js/filterBtns.js"></script>
 
 </body>
