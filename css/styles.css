@@ -114,7 +114,10 @@ button:hover {
     display: flex;
     justify-content: end;
     width: 100%;
-    margin-bottom: 13px;
+    position: absolute;
+    height: 20px;
+    bottom: -20px;
+    right: 0;
 }
 
 table {
@@ -154,15 +157,20 @@ table {
 }
 
 #headers {
-    width: 100%;
+    width: 95%;
     display: flex;
+    margin-left: 5%;
+    align-self: flex-end;
     justify-content: space-between;
+    border-bottom: 1px dashed gray;
+    overflow: hidden;
 }
 #headers > p {
     margin: 10px;
     margin-left: 32px;
     margin-right: 54px;
     font-family: sans-serif;
+    margin-bottom: 0;
 }
 
 table {
@@ -176,18 +184,9 @@ tr {
 td {
     margin: 32px;
     padding-left: 32px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
-
-#barChartCheckboxContainer {
-    background: linear-gradient(to right, #D9D9D9, #737373);
-    height: 15%;
-    width: 100%;
-}
-
-
-
-
 
 
 
@@ -236,17 +235,30 @@ td {
     margin: 0 !important;
 }
 
-
+/*                 'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(201, 203, 207, 0.7)' */
 
 .female-prof {
-    color: blue;
+    color: rgba(54, 162, 235, 0.9);
 }
 
 .male-prof {
-    color: red;
+    color: rgba(255, 99, 132, 0.9);
 }
 
 .unknown-prof {
-    color: gray;
+    color: rgb(171, 173, 177)
 }
 
+#barChartCheckboxContainer {
+    background: linear-gradient(to right, #D9D9D9, #737373);
+    height: 15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#radioBtns {
+    display: flex;
+}
