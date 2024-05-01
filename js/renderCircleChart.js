@@ -41,7 +41,7 @@ function recreateCircleChart(filterDept) {
     dividePositions(data);
     makeCircle(postionsData);
 
-    recreateRankChart(womenPositions, menPositions, unknownPositions)
+    recreateRankChart(womenPositions, menPositions, unknownPositions, overallPositions)
 }
 
 

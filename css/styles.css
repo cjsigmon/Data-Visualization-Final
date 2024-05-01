@@ -207,18 +207,33 @@ td {
 }
 
 #divider {
-
     height: 90%;
     width: 1px;
     background-color: #737373;
 }
 
 #genderBreakdown {
+    display: table;
     height: 100%;
     width: 78%;
-    display: flex;
-    font-size: 7pt;
-    justify-content: space-evenly;
+}
+
+.titles-row {
+    border: 1px solid;
+    font-size: 6pt;
+}
+
+.titles-row > td {
+    border: 1px solid gray;
+    padding-left: 0;
+}
+
+#titleRow > td {
+    text-align: center;
+}
+
+i {
+    font-size: 2pt !important;
 }
 
 .woman-prof {
