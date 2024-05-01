@@ -216,5 +216,7 @@ td {
 #genderBreakdown {
     height: 100%;
     width: 78%;
+    display: flex;
+    font-size: 5pt;
 }
 
