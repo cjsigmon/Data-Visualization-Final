@@ -1,12 +1,5 @@
-
 const cirCtx = document.getElementById('circleGraph');
-
 let circleChart;
-
-let menPositions = [];
-let womenPositions = [];
-let unknownPositions = [];
-let overallPositions = [];
 
 let postionsData = [];
 
@@ -25,9 +18,7 @@ async function init() {
 init();
 
 
-function recreateCircleChart(filterDept) {
-    console.log("recreating circle for dept: ", filterDept)
-
+function recreateCircleChart(filterDept, filterRanks, tenureTrack) {
     menPositions = [];
     womenPositions = [];
     unknownPositions = [];
@@ -38,6 +29,24 @@ function recreateCircleChart(filterDept) {
     let data = allProfsData.filter((r) => {
        return r["Department"] == filterDept}
     );
+    if (filterRanks) {
+      if (tenureTrack) {
+        data = data.filter((r) => {
+          let title = r["primary_working_title"];
+          let positionShouldBeFiltered = false;
+          nonTenureModifiers.forEach((modifier) => {
+            if (title.includes(modifier)) {
+              positionShouldBeFiltered = true;
+            }
+          })
+          return positionShouldBeFiltered;
+        })
+      } else {
+
+      }
+    }
+
+
     dividePositions(data);
     makeCircle(postionsData);
 
@@ -65,7 +74,6 @@ function dividePositions(data) {
 
 
 function makeCircle(data) {
-    console.log("here", data)
     if (circleChart) circleChart.destroy();
     circleChart = new Chart(cirCtx, {
         type: 'doughnut',

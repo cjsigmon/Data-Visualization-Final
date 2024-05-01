@@ -42,6 +42,7 @@ function renderTable(data) {
         graphBtn.onclick = () => {
             recreateChart(td1.innerText);
             recreateCircleChart(td1.innerText);
+            selectedDept = td1.innerText;
         };
         td3.append(graphBtn);
 

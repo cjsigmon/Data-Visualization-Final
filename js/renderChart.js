@@ -3,10 +3,7 @@ const ctx = document.getElementById('chartGraph');
 let allProfsData;
 let myChart;
 
-let menSals = [];
-let womenSals = [];
-let unknownSals = [];
-let overallSals = [];
+
 
 let salsData = [];
 
@@ -23,19 +20,35 @@ async function init() {
 init();
 
 
-function recreateChart(filterDept) {
-    console.log("recreating chart for dept: ", filterDept)
-
+function recreateChart(filterDept, filterRanks, tenureTrack) {
     menSals = [];
     womenSals = [];
     unknownSals = [];
     overallSals = [];
     salsData = [];
-    console.log(typeof allProfsData)
 
     let data = allProfsData.filter((r) => {
        return r["Department"] == filterDept}
     );
+
+    if (filterRanks) {
+      if (tenureTrack) {
+        data = data.filter((r) => {
+          let title = r["primary_working_title"];
+          let positionShouldBeFiltered = false;
+          nonTenureModifiers.forEach((modifier) => {
+            if (title.includes(modifier)) {
+              positionShouldBeFiltered = true;
+            }
+          })
+          return positionShouldBeFiltered;
+        })
+      } else {
+
+      }
+    }
+
+
     divideSals(data);
     makeGraph(salsData, filterDept);
 }
@@ -71,7 +84,6 @@ function divideSals(data) {
 
 
 function makeGraph(data, filterDept) {
-    console.log("new data?", data)
     if (myChart) myChart.destroy();
     myChart = new Chart(ctx, {
         type: 'bar',
