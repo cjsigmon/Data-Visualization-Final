@@ -71,7 +71,7 @@ function tableBtn(tableNum) {
 }
 
 
-fetch("../data/depts_by_n.json").then((response) => {
+fetch("./data/depts_by_n.json").then((response) => {
     return response.json();
 }).then((data) => {
     renderTable(data)

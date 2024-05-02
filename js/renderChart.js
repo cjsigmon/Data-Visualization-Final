@@ -9,7 +9,7 @@ let salsData = [];
 
 
 async function init() {
-    allProfsData = await fetch("../data/profs.json").then((response) => {
+    allProfsData = await fetch("./data/profs.json").then((response) => {
         return response.json();
     });
 

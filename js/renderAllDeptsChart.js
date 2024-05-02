@@ -11,7 +11,7 @@ let groupedByDeptArr = [];
 
 async function init() {
     disparitySals = [];
-    allProfsData = await fetch("../data/profs.json").then((response) => {
+    allProfsData = await fetch("./data/profs.json").then((response) => {
         return response.json();
     });
     allProfsData.forEach((r) => {

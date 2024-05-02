@@ -6,7 +6,7 @@ let postionsData = [];
 
 async function init() {
     if (!allProfsData) {
-        allProfsData = await fetch("../data/profs.json").then((response) => {
+        allProfsData = await fetch("./data/profs.json").then((response) => {
             return response.json();
         });
     }
