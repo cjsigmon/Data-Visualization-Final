@@ -133,4 +133,102 @@ cat(profs_json)
 write(profs_json, "profs.json")
 ```
 
+### How many female and male professors are there estimated to be? Does this match the numbers and ratio from UNC OIRA https://oira.unc.edu/reports/ which has 4,234 total faculty, 2,204 female and 2,030 male.
 
+```{r}
+
+predict_gender_profs %>%
+  count(likely_gender)
+
+
+```
+
+### We can see the numbers are not the exact same, due to so many names not having a predicted gender, but the ratio looks like it should be the same. Let's compare.
+
+```{r}
+print(2052/1880) #ratio from estimated gender profs
+print(2204/2030) # actual 
+```
+### Yes those ratios are just about 0.01 different. The predict gender passes the smell test. Now let's quickly look to see the average salary overall and by predicted gender for professors at UNC to test our hypotehesis that men tend to make more.
+```{r}
+overall_avg_sal <- mean(predict_gender_profs$employee_annual_base_salary)
+
+male_profs <- predict_gender_profs %>%
+  filter(likely_gender == "male")
+male_avg_sal <- mean(male_profs$employee_annual_base_salary)
+
+female_profs <- predict_gender_profs %>%
+  filter(likely_gender == "female")
+female_avg_sal <- mean(female_profs$employee_annual_base_salary)
+
+na_profs <- predict_gender_profs %>%
+  filter(is.na(likely_gender))
+na_avg_sal <- mean(na_profs$employee_annual_base_salary)
+
+
+
+
+
+cat("avg overall salary:", overall_avg_sal, "\n")
+
+cat("avg male salary:", male_avg_sal, "\n")
+cat("avg female salary:", female_avg_sal, "\n")
+cat("avg unpredicted gender salary:", na_avg_sal, "\n")
+
+
+```
+
+
+### finally, let's see if our professor gender estimates agree with the OIRA data on professor ranks by gender. We would expect to see more estimated female professors on the tenure track, and non tenure track, but more male professors with full tenure. All ratios will be calculated female/male.
+### First we need to get the profs filtered by tenure/tenure track and non tenure track.
+```{r}
+tenure_and_tenure_track <- predict_gender_profs %>%
+  filter(!grepl("*Research*|*Clinical*|*Teaching*|*Adjunct*|*Term*|*Trm*|*Provision*|*Practice", 
+                primary_working_title))
+
+tenure_and_tenure_track
+```
+### There's our tenure/tenure track profs, now let's just do the opposite to get the fixed term
+```{r}
+fixed_term <- predict_gender_profs %>%
+  filter(grepl("*Research*|*Clinical*|*Teaching*|*Adjunct*|*Term*|*Trm*|*Provision*|*Practice", 
+                primary_working_title))
+
+fixed_term
+```
+### Perfect. Now we can get the count of male and female profs from each and calculate the ratios
+```{r}
+# counts for tenure/tenure track
+tenure_track_female <- tenure_and_tenure_track %>%
+  filter(likely_gender == "female")
+
+tt_f_count <- count(tenure_track_female)
+
+tenure_track_male <- tenure_and_tenure_track %>%
+  filter(likely_gender == "male")
+
+tt_m_count <- count(tenure_track_male)
+
+# Now get counts for fixed term
+fixed_term_female <- fixed_term %>%
+  filter(likely_gender == "female")
+
+ft_f_count <- count(fixed_term_female)
+
+fixed_term_male <- fixed_term %>%
+  filter(likely_gender == "male")
+
+ft_m_count <- count(fixed_term_male)
+
+
+tt_est <- tt_f_count$n/tt_m_count$n
+tt_act <- 777/1020
+ft_est <- ft_f_count$n/ft_m_count$n
+ft_act <- 1427/1010
+
+cat("estimated ratio for tenure and tenure track:", tt_est, "\n") 
+cat("actual ratio for tenure and tenure track:", tt_act, "\n") 
+cat("estimated for fixed-term (non tenure track)", ft_est, "\n") 
+cat("actual for fixed-term (non tenure track)", ft_act, "\n")
+```
+### All looks good, the largest ratio difference is the 0.02 between the tenure/tenure track estimated and actual numbers. These should be good enough to provide convincing evidence that the findings that male profs make more are accurate.
