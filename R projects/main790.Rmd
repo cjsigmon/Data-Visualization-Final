@@ -1,0 +1,136 @@
+---
+title: "UNC_Salary"
+author: "Caleb Sigmon"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#install.packages("predictrace")
+#install.packages("gcookbook")
+
+library(tidyverse)
+library(janitor)
+library(readxl)
+library(ggplot2)
+library(lubridate)
+library(predictrace)
+library(gcookbook)
+
+
+salaries <- clean_names(
+  read_excel("./Salary Data Export230930.xlsx", 
+    col_types = c("text", "text", "text", 
+        "text", "numeric", "date", "text", 
+        "numeric", "text", "text"))
+) 
+salaries
+```
+## Filter the salaries to look at just UNC-CH and store that in ch_sals.
+
+```{r}
+ch_sals <- salaries %>%
+  filter(institution_name == "UNC-CH") %>%
+  arrange(initial_hire_date)
+
+ch_sals
+
+```
+
+### How many are there?
+
+```{r}
+
+ch_sals %>%
+  count(primary_working_title)
+
+
+```
+
+
+## Now let's look at all professors that are broadly clinical or teaching
+```{r}
+
+instructors_or_professors <- ch_sals %>%
+  filter(grepl("(Professor|Instructor|Prof)", primary_working_title)) %>%
+  filter(!grepl("Professional", primary_working_title))
+
+departments_by_n <- instructors_or_professors %>%
+  group_by(employee_home_department) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+
+departments_by_n
+
+
+library(dplyr)
+
+# Combine like departments, which begin with one of the following words.
+# Since many of these contain only 1-3 people and are subdepartments.
+custom_group <- function(text) {
+  case_when(
+    grepl("^ASOD", text) ~ "ASOD",
+    grepl("^Medicine", text) ~ "Medicine",
+    grepl("^Neurology", text) ~ "Neurology",
+    grepl("^Anesth", text) ~ "Anesthesiology",
+    grepl("^Biomedical Engineering", text) ~ "Biomedical Engineering",
+    grepl("^Biostatistics", text) ~ "Biostatistics",
+    grepl("^Dermatology", text) ~ "Dermatology",
+    grepl("^Emergency Medicine", text) ~ "Emergency Medicine",
+    grepl("^Psychiatry", text) ~ "Psychiatry",
+    grepl("^ENT", text) ~ "ENT",
+    grepl("*Health Sciences*", text) ~ "Health Sciences",
+    grepl("^Med", text) ~ "Medicine",
+    grepl("^OBGYN", text) ~ "OBGYN",
+    grepl("^Opthalmology", text) ~ "Opthalmology",
+    grepl("^Orthopaedics", text) ~ "Orthopaedics",
+    grepl("^Pathology Lab Med", text) ~ "Pathology Lab Med",
+    grepl("^Peds|^Pediatric", text) ~ "Pediatrics",
+    grepl("^Radiation Oncology", text) ~ "Radiation Oncology",
+    grepl("^Radiology", text) ~ "Radiology",
+    grepl("^Surgery", text) ~ "Surgery",
+    grepl("^SOP", text) ~ "SOP",
+    grepl("^Urology", text) ~ "Urology",
+    grepl("*Nursing*", text) ~ "School of Nursing",
+    
+    
+    TRUE ~ text
+  )
+}
+
+# Apply custom grouping
+grouped_departments_by_n <- departments_by_n %>%
+  mutate(Department = custom_group(employee_home_department)) %>%
+  group_by(Department) %>%
+  summarise(n = sum(n)) %>%
+  arrange(Department)
+
+# Apply custom grouping
+ungrouped_departments_by_n <- instructors_or_professors %>%
+  mutate(Department = custom_group(employee_home_department)) 
+
+# now predict the gender for these profs using the predict_gender function from the predict_race package
+predict_gender_profs <- ungrouped_departments_by_n %>%
+    mutate(first_name = tolower(first_name), likely_gender = predict_gender(first_name, probability = FALSE)$likely_gender) %>%
+    mutate(likely_gender = ifelse(is.na(likely_gender), "unknown", likely_gender))
+
+
+# Now let's generate the json object of these two dataframes.
+
+#install.packages("jsonlite")
+library(jsonlite)
+depts_json <- toJSON(grouped_departments_by_n)
+cat(depts_json)
+write(depts_json, "depts_by_n.json")
+
+
+profs_json <- toJSON(predict_gender_profs)
+cat(profs_json)
+write(profs_json, "profs.json")
+```
+
+
