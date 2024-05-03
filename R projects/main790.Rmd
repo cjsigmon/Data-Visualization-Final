@@ -165,17 +165,10 @@ na_profs <- predict_gender_profs %>%
   filter(is.na(likely_gender))
 na_avg_sal <- mean(na_profs$employee_annual_base_salary)
 
-
-
-
-
 cat("avg overall salary:", overall_avg_sal, "\n")
-
 cat("avg male salary:", male_avg_sal, "\n")
 cat("avg female salary:", female_avg_sal, "\n")
 cat("avg unpredicted gender salary:", na_avg_sal, "\n")
-
-
 ```
 
 
