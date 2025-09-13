@@ -2,7 +2,8 @@ This project is a web dashboard comparing professor salaries at UNC.
 
 # Viewing
 
-Research:is found in the the "790 Final Write up" PDF.
+Research can be found in the the "790 Final Write up" PDF.
+A deployment of the dashboard can be viewed at https://cjsigmon.github.io/final/
 
 # Setup
 
